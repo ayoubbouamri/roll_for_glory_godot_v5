@@ -52,19 +52,8 @@ func _on_roll2():
 	await get_tree().create_timer(1.2).timeout
 	var rolled := randi_range(1,6)
 	var ok := rolled in picks
-	result_label.text = "Rolled %d - %s" % [rolled, ok ? "SUCCESS" : "FAIL"]
+	result_label.text = "Rolled %d - %s" % [rolled, ("SUCCESS" if ok else "FAIL")]
 	await get_tree().create_timer(0.8).timeout
 	hide()
 	emit_signal("roll_finished", ok, rolled)
 
-func _on_roll():
-	result_label.text = "Rolling..."
-	await get_tree().create_timer(1.2).timeout
-	var rolled := randi_range(1,6)
-	var ok := rolled in picks
-	# Show a clean result message
-	result_label.text = "Rolled %d - %s" % [rolled, ok ? "SUCCESS" : "FAIL"]
-	result_label.text = "Rolled %d — %s" % [rolled, "SUCCESS" if ok else "FAIL"]
-	await get_tree().create_timer(0.8).timeout
-	hide()
-	emit_signal("roll_finished", ok, rolled)

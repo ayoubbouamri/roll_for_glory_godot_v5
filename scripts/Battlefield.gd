@@ -75,24 +75,24 @@ func _connect_buttons() -> void:
 
 
 func _spawn_teams() -> void:
-    var payload := GameState.build_launch_payload()
-    # Arrange positions
-    var left := Rect2(Vector2(140, 160), Vector2(360, 400))
-    var right := Rect2(Vector2(780, 160), Vector2(360, 400))
-    for d in payload["roster_a"]:
-        var a: Node2D = Avatar.instantiate()
-        add_child(a)
-        a.position = left.position + Vector2(randi() % int(left.size.x), randi() % int(left.size.y))
-        a.call("setup", d, "A")
-        a.connect("clicked_me", Callable(self, "_on_avatar_clicked2"))
-        team_a.append(a)
-    for d in payload["roster_b"]:
-        var b: Node2D = Avatar.instantiate()
-        add_child(b)
-        b.position = right.position + Vector2(randi() % int(right.size.x), randi() % int(right.size.y))
-        b.call("setup", d, "B")
-        b.connect("clicked_me", Callable(self, "_on_avatar_clicked2"))
-        team_b.append(b)
+	var payload := GameState.build_launch_payload()
+	# Arrange positions
+	var left := Rect2(Vector2(140, 160), Vector2(360, 400))
+	var right := Rect2(Vector2(780, 160), Vector2(360, 400))
+	for d in payload["roster_a"]:
+		var a: Node2D = Avatar.instantiate()
+		add_child(a)
+		a.position = left.position + Vector2(randi() % int(left.size.x), randi() % int(left.size.y))
+		a.call("setup", d, "A")
+		a.connect("clicked_me", Callable(self, "_on_avatar_clicked2"))
+		team_a.append(a)
+	for d in payload["roster_b"]:
+		var b: Node2D = Avatar.instantiate()
+		add_child(b)
+		b.position = right.position + Vector2(randi() % int(right.size.x), randi() % int(right.size.y))
+		b.call("setup", d, "B")
+		b.connect("clicked_me", Callable(self, "_on_avatar_clicked2"))
+		team_b.append(b)
 
 	_update_ui()
 
@@ -109,10 +109,10 @@ func _update_ui() -> void:
 	_check_win()
 
 func _update_buttons_state():
-    var can_revive := _team_has_dead(current_team) and _team_hearts(current_team) > 0
-    revive_btn.disabled = not can_revive
-    kill_btn.disabled = false
-    double_btn.disabled = false
+	var can_revive := _team_has_dead(current_team) and _team_hearts(current_team) > 0
+	revive_btn.disabled = not can_revive
+	kill_btn.disabled = false
+	double_btn.disabled = false
 
 func _on_avatar_clicked2(av):
 	if phase != Phase.SELECT_TARGETS:
@@ -174,9 +174,9 @@ func _kill_acting_random() -> void:
 	# If failure on Double, random acting hero dies (closest to center for simplicity)
 	var team := current_team == "A" ? team_a : team_b
 	var candidates := []
-    for a in team:
-        if a.is_alive():
-            candidates.append(a)
+	for a in team:
+		if a.is_alive():
+			candidates.append(a)
 	if candidates.is_empty():
 		return
 	var victim = candidates[randi()%candidates.size()]
@@ -230,25 +230,25 @@ func _game_over(msg: String):
 func _living_count(team: String) -> int:
 	var arr := team_a if team == "A" else team_b
 	var n := 0
-    for a in arr:
-        if a.is_alive(): n += 1
+	for a in arr:
+		if a.is_alive(): n += 1
 	return n
 
 func _team_has_dead(team: String) -> bool:
 	var arr := team_a if team == "A" else team_b
-    for a in arr:
-        if not a.is_alive(): return true
+	for a in arr:
+		if not a.is_alive(): return true
 	return false
 
 func _team_hearts(team: String) -> int:
 	return GameState.hearts_a if team == "A" else GameState.hearts_b
 
 func _consume_heart(team: String) -> void:
-    if team == "A":
-        GameState.hearts_a = max(0, GameState.hearts_a - 1)
-    else:
-        GameState.hearts_b = max(0, GameState.hearts_b - 1)
-    _update_ui()
+	if team == "A":
+		GameState.hearts_a = max(0, GameState.hearts_a - 1)
+	else:
+		GameState.hearts_b = max(0, GameState.hearts_b - 1)
+	_update_ui()
 
 func _hearts(n: int) -> String:
 	var s := ""
