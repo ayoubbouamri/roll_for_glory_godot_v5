@@ -142,7 +142,7 @@ func _on_avatar_clicked2(av):
 
 func _kill_acting_random() -> void:
 	# If failure on Double, random acting hero dies (closest to center for simplicity)
-	var team := current_team == "A" ? team_a : team_b
+	var team := team_a if current_team == "A" else team_b
 	var candidates := []
 	for a in team:
 		if a.is_alive():

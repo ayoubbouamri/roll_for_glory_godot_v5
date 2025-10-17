@@ -25,4 +25,3 @@ func _on_avatar_clicked(av):
 			_play_revive(av)
 			_consume_heart(current_team)
 			_end_turn()
-
