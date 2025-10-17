@@ -99,8 +99,6 @@ func _spawn_teams() -> void:
 func _update_ui() -> void:
 	team_a_label.text = "Team A (%d alive)" % _living_count("A")
 	team_b_label.text = "Team B (%d alive)" % _living_count("B")
-	hearts_a_label.text = "♥" * GameState.hearts_a
-	hearts_b_label.text = "♥" * GameState.hearts_b
 	turn_label.text = "Turn: Team %s" % current_team
 	# Override hearts display with a robust builder (avoids broken glyphs)
 	hearts_a_label.text = _hearts(GameState.hearts_a)
@@ -138,34 +136,6 @@ func _on_avatar_clicked2(av):
 			if av.get_team() != current_team: return
 			if av.is_alive(): return
 			status_label.text = "REVIVE: %s" % av.get_display_name()
-			_play_revive(av)
-			_consume_heart(current_team)
-			_end_turn()
-
-func _on_avatar_clicked(av):
-	if phase != Phase.SELECT_TARGETS:
-		return
-	match pending_action:
-		"KILL":
-			if av.data.team == current_team: return
-			if not av.data.alive: return
-			status_label.text = "KILL → %s" % av.data.name
-			_play_kill(av)
-			pending_kill_targets -= 1
-			if pending_kill_targets <= 0:
-				_end_turn()
-		"DOUBLE":
-			if av.data.team == current_team: return
-			if not av.data.alive: return
-			status_label.text = "DOUBLE-KILL → %s" % av.data.name
-			_play_kill(av)
-			pending_kill_targets -= 1
-			if pending_kill_targets <= 0:
-				_end_turn()
-		"REVIVE":
-			if av.data.team != current_team: return
-			if av.data.alive: return
-			status_label.text = "REVIVE → %s" % av.data.name
 			_play_revive(av)
 			_consume_heart(current_team)
 			_end_turn()

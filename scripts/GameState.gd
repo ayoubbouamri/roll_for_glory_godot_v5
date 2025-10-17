@@ -18,13 +18,13 @@ var hearts_b: int = STARTING_HEARTS
 
 # Character pool (emoji + style). This mirrors the technical sheet concept.
 var CHARACTER_POOL := [
-	{"icon":"🗡️","name":"Rogue","color": Color(0.23,0.62,0.95), "attack":"melee"},
-	{"icon":"🏹","name":"Archer","color": Color(0.16,0.80,0.44), "attack":"ranged"},
-	{"icon":"🛡️","name":"Knight","color": Color(0.90,0.20,0.31), "attack":"melee"},
-	{"icon":"🧙","name":"Mage","color": Color(0.57,0.44,0.84), "attack":"ranged"},
-	{"icon":"🪄","name":"Sorcerer","color": Color(0.98,0.78,0.18), "attack":"ranged"},
-	{"icon":"⚔️","name":"Fighter","color": Color(0.95,0.63,0.13), "attack":"melee"},
-	{"icon":"🧝","name":"Ranger","color": Color(0.17,0.63,0.55), "attack":"ranged"}
+    {"icon":"@","name":"Rogue","color": Color(0.23,0.62,0.95), "attack":"melee"},
+    {"icon":"^","name":"Archer","color": Color(0.16,0.80,0.44), "attack":"ranged"},
+    {"icon":"&","name":"Knight","color": Color(0.90,0.20,0.31), "attack":"melee"},
+    {"icon":"*","name":"Mage","color": Color(0.57,0.44,0.84), "attack":"ranged"},
+    {"icon":"+","name":"Sorcerer","color": Color(0.98,0.78,0.18), "attack":"ranged"},
+    {"icon":"#","name":"Fighter","color": Color(0.95,0.63,0.13), "attack":"melee"},
+    {"icon":"~","name":"Ranger","color": Color(0.17,0.63,0.55), "attack":"ranged"}
 ]
 
 var SAMPLE_NAMES := ["Aiden","Bella","Cairo","Dina","Eli","Faye","Gio","Hana","Ivan","Jade","Kian","Lia","Moe","Nia","Omar","Pia","Quin","Ria","Sam","Tia"]
