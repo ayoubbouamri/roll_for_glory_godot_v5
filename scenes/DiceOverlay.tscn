@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/DiceOverlay.gd" id="1"]
+
+[node name="DiceOverlay" type="Window"]
+size = Vector2i(360, 420)
+unresizable = true
+visible = false
+title = "Choose 3 numbers, then Roll"
+script = ExtResource("1")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/separation = 10
+
+[node name="Grid" type="GridContainer" parent="VBox"]
+columns = 3
+theme_override_constants/vseparation = 8
+theme_override_constants/hseparation = 8
+
+[node name="Result" type="Label" parent="VBox"]
+text = "Pick three numbers."
+horizontal_alignment = 1
+
+[node name="Roll" type="Button" parent="VBox"]
+text = "Roll"
