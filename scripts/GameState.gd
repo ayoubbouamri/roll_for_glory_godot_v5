@@ -36,19 +36,19 @@ func ensure_rosters() -> void:
 	# If empty, auto-generate simple rosters using pool
 	if roster_a.is_empty():
 		roster_a = []
-		for i in team_a_size:
-			var c = CHARACTER_POOL[i % CHARACTER_POOL.size()]
+		for i in range(team_a_size):
+			var c: Dictionary = CHARACTER_POOL[i % CHARACTER_POOL.size()]
 			roster_a.append({
-				"name": "%s %d" % [SAMPLE_NAMES[i % SAMPLE_NAMES.size()], i+1],
-				"icon": c.icon, "color": c.color, "attack": c.attack, "alive": true
+				"name": "%s %d" % [SAMPLE_NAMES[i % SAMPLE_NAMES.size()], i + 1],
+				"icon": c["icon"], "color": c["color"], "attack": c["attack"], "alive": true
 			})
 	if roster_b.is_empty():
 		roster_b = []
-		for i in team_b_size:
-			var c = CHARACTER_POOL[(i+2) % CHARACTER_POOL.size()]
+		for i in range(team_b_size):
+			var c: Dictionary = CHARACTER_POOL[(i + 2) % CHARACTER_POOL.size()]
 			roster_b.append({
-				"name": "%s %d" % [SAMPLE_NAMES[(i+7) % SAMPLE_NAMES.size()], i+1],
-				"icon": c.icon, "color": c.color, "attack": c.attack, "alive": true
+				"name": "%s %d" % [SAMPLE_NAMES[(i + 7) % SAMPLE_NAMES.size()], i + 1],
+				"icon": c["icon"], "color": c["color"], "attack": c["attack"], "alive": true
 			})
 
 func reset_hearts() -> void:
