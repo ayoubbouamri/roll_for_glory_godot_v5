@@ -56,4 +56,3 @@ func _on_roll2():
 	await get_tree().create_timer(0.8).timeout
 	hide()
 	emit_signal("roll_finished", ok, rolled)
-

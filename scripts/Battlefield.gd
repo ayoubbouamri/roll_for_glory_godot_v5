@@ -46,8 +46,8 @@ func _connect_buttons() -> void:
 		pending_action = "DOUBLE"
 		dice.open_and_get_result()
 		var sig = await dice.roll_finished
-		var ok: bool = sig[0]
-		var rolled: int = sig[1]
+        var ok: bool = sig[0]
+        var _rolled: int = sig[1]
 		if ok:
 			pending_kill_targets = 2
 			status_label.text = "SUCCESS: Select up to 2 enemies to kill."
