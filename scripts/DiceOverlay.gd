@@ -4,9 +4,9 @@ signal roll_finished(success: bool, rolled: int)
 var picks := []
 var buttons := []
 
-@onready var grid: GridContainer = %Grid
-@onready var result_label: Label = %Result
-@onready var roll_btn: Button = %Roll
+@onready var grid: GridContainer = $VBox/Grid
+@onready var result_label: Label = $VBox/Result
+@onready var roll_btn: Button = $VBox/Roll
 
 func _ready() -> void:
 	_build_grid()
