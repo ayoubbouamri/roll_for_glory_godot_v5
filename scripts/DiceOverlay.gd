@@ -48,15 +48,15 @@ func open_and_get_result():
 	popup_centered()
 
 func _on_roll2():
-    # 3-second animated roll preview
-    var spinner := ["◐","◓","◑","◒"]
-    for i in range(15): # 15 * 0.2s = 3.0s
-        var preview := randi_range(1,6)
-        result_label.text = "Rolling %s  %d" % [spinner[i % spinner.size()], preview]
-        await get_tree().create_timer(0.2).timeout
-    var rolled := randi_range(1,6)
-    var ok := rolled in picks
-    result_label.text = "Rolled %d - %s" % [rolled, ("SUCCESS" if ok else "FAIL")]
-    await get_tree().create_timer(0.5).timeout
-    hide()
-    emit_signal("roll_finished", ok, rolled)
+	# 3-second animated roll preview
+	var spinner := ["◐","◓","◑","◒"]
+	for i in range(15): # 15 * 0.2s = 3.0s
+		var preview := randi_range(1,6)
+		result_label.text = "Rolling %s  %d" % [spinner[i % spinner.size()], preview]
+		await get_tree().create_timer(0.2).timeout
+	var rolled := randi_range(1,6)
+	var ok := rolled in picks
+	result_label.text = "Rolled %d - %s" % [rolled, ("SUCCESS" if ok else "FAIL")]
+	await get_tree().create_timer(0.5).timeout
+	hide()
+	emit_signal("roll_finished", ok, rolled)
