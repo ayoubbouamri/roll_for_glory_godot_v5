@@ -5,6 +5,7 @@ var data := { "name":"", "icon":"", "color": Color.WHITE, "attack":"melee", "ali
 
 @onready var icon_label: Label = $Icon
 @onready var ring: ColorRect = $Ring
+@onready var active_rect: ColorRect = $Active
 
 func setup(d: Dictionary, team: String) -> void:
 	data = d.duplicate(true)
@@ -14,16 +15,20 @@ func setup(d: Dictionary, team: String) -> void:
 	_set_alive(d.get("alive", true))
 
 func _set_alive(al: bool) -> void:
-	data["alive"] = al
-	visible = true
-	icon_label.self_modulate = Color.WHITE if al else Color(1,1,1,0.3)
-	ring.color = Color(0.2,1.0,0.3,0.5) if al else Color(0.3,0.3,0.3,0.3)
+    data["alive"] = al
+    visible = true
+    icon_label.self_modulate = Color.WHITE if al else Color(1,1,1,0.3)
+    ring.color = Color(0.2,1.0,0.3,0.5) if al else Color(0.3,0.3,0.3,0.3)
 
 func mark_dead() -> void:
-	_set_alive(false)
+    _set_alive(false)
 
 func mark_alive() -> void:
-	_set_alive(true)
+    _set_alive(true)
+
+func set_active(on: bool) -> void:
+    if active_rect:
+        active_rect.visible = on
 
 func is_alive() -> bool:
 	return bool(data.get("alive", true))
@@ -32,7 +37,7 @@ func get_team() -> String:
 	return String(data.get("team", "A"))
 
 func get_display_name() -> String:
-	return String(data.get("name", ""))
+    return String(data.get("name", ""))
 
 func _input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
