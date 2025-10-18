@@ -93,7 +93,7 @@ func _spawn_teams() -> void:
 	_spawn_team(payload["roster_a"], "A", zone_left, team_a)
 	_spawn_team(payload["roster_b"], "B", zone_right, team_b)
 
-	update() # redraw zones
+	queue_redraw() # redraw zones
 	_update_ui()
 
 func _spawn_team(roster: Array, team: String, zone: Rect2, out_arr: Array) -> void:
