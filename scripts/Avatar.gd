@@ -9,7 +9,7 @@ var data := { "name":"", "icon":"", "color": Color.WHITE, "attack":"melee", "ali
 @onready var hit_area: Area2D = $HitArea
 
 var _hover := false
-var _idle_tween: Tween
+var _idle_tween: SceneTreeTween
 
 func setup(d: Dictionary, team: String) -> void:
 	data = d.duplicate(true)
@@ -82,5 +82,5 @@ func _start_idle():
 	_idle_tween.tween_property(self, "position:y", position.y - 3.0, 0.65).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 func _stop_idle():
-	if _idle_tween and _idle_tween.is_valid():
+	if is_instance_valid(_idle_tween):
 		_idle_tween.kill()
