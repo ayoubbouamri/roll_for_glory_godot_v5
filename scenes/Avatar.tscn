@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3]
+﻿[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/Avatar.gd" id="1"]
 
@@ -11,8 +11,17 @@ color = Color(1, 1, 0, 0.35)
 size = Vector2(64, 64)
 position = Vector2(-32, -32)
 
+[sub_resource type="CircleShape2D" id="1"]
+radius = 28.0
+
+[node name="HitArea" type="Area2D" parent="."]
+input_pickable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+shape = SubResource("1")
+
 [node name="Icon" type="Label" parent="."]
-text = "🗡️"
+text = "?"
 horizontal_alignment = 1
 vertical_alignment = 1
 theme_override_font_sizes/font_size = 28
