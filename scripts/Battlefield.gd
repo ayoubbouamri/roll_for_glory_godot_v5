@@ -1,5 +1,5 @@
 extends Node2D
-const Avatar := preload("res://scenes/Avatar.tscn")
+@onready var Avatar: PackedScene = load("res://scenes/Avatar.tscn")
 
 enum Phase { CHOOSE_ACTION, SELECT_TARGETS, RESOLVING, GAME_OVER }
 
