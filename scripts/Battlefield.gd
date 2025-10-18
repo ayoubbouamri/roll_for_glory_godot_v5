@@ -86,44 +86,44 @@ func _connect_buttons() -> void:
 
 
 func _spawn_teams() -> void:
-    var payload := GameState.build_launch_payload()
-    zone_left = Rect2(Vector2(140, 160), Vector2(360, 400))
-    zone_right = Rect2(Vector2(780, 160), Vector2(360, 400))
+	var payload := GameState.build_launch_payload()
+	zone_left = Rect2(Vector2(140, 160), Vector2(360, 400))
+	zone_right = Rect2(Vector2(780, 160), Vector2(360, 400))
 
-    _spawn_team(payload["roster_a"], "A", zone_left, team_a)
-    _spawn_team(payload["roster_b"], "B", zone_right, team_b)
+	_spawn_team(payload["roster_a"], "A", zone_left, team_a)
+	_spawn_team(payload["roster_b"], "B", zone_right, team_b)
 
-    update() # redraw zones
-    _update_ui()
+	update() # redraw zones
+	_update_ui()
 
 func _spawn_team(roster: Array, team: String, zone: Rect2, out_arr: Array) -> void:
-    var min_sep := 70.0
-    for d in roster:
-        var node: Node2D = Avatar.instantiate()
-        add_child(node)
-        # Try to find a non-overlapping spot
-        var pos := Vector2.ZERO
-        var ok := false
-        for _try in range(200):
-            pos = zone.position + Vector2(randf() * zone.size.x, randf() * zone.size.y)
-            ok = true
-            for other in out_arr:
-                if other.position.distance_to(pos) < min_sep:
-                    ok = false
-                    break
-            if ok:
-                break
-        if not ok:
-            # fallback to simple grid
-            var idx := out_arr.size()
-            var cols := int(max(1, floor(zone.size.x / min_sep)))
-            var row := int(floor(float(idx) / float(cols)))
-            var col := idx % cols
-            pos = zone.position + Vector2( (col + 0.5) * (zone.size.x / cols), (row + 0.5) * min_sep )
-        node.position = pos
-        node.call("setup", d, team)
-        node.connect("clicked_me", Callable(self, "_on_avatar_clicked2"))
-        out_arr.append(node)
+	var min_sep := 70.0
+	for d in roster:
+		var node: Node2D = Avatar.instantiate()
+		add_child(node)
+		# Try to find a non-overlapping spot
+		var pos := Vector2.ZERO
+		var ok := false
+		for _try in range(200):
+			pos = zone.position + Vector2(randf() * zone.size.x, randf() * zone.size.y)
+			ok = true
+			for other in out_arr:
+				if other.position.distance_to(pos) < min_sep:
+					ok = false
+					break
+			if ok:
+				break
+		if not ok:
+			# fallback to simple grid
+			var idx := out_arr.size()
+			var cols := int(max(1, floor(zone.size.x / min_sep)))
+			var row := int(floor(float(idx) / float(cols)))
+			var col := idx % cols
+			pos = zone.position + Vector2( (col + 0.5) * (zone.size.x / cols), (row + 0.5) * min_sep )
+		node.position = pos
+		node.call("setup", d, team)
+		node.connect("clicked_me", Callable(self, "_on_avatar_clicked2"))
+		out_arr.append(node)
 
 func _update_ui() -> void:
 	team_a_label.text = "Team A (%d alive)" % _living_count("A")
@@ -132,14 +132,14 @@ func _update_ui() -> void:
 	# Override hearts display with a robust builder (avoids broken glyphs)
 	hearts_a_label.text = _hearts(GameState.hearts_a)
 	hearts_b_label.text = _hearts(GameState.hearts_b)
-    _update_buttons_state()
-    _check_win()
+	_update_buttons_state()
+	_check_win()
 
 func _draw() -> void:
-    if zone_left.size != Vector2.ZERO:
-        draw_rect(zone_left, Color(0.05, 0.3, 0.1, 0.2), true)
-    if zone_right.size != Vector2.ZERO:
-        draw_rect(zone_right, Color(0.3, 0.05, 0.1, 0.2), true)
+	if zone_left.size != Vector2.ZERO:
+		draw_rect(zone_left, Color(0.05, 0.3, 0.1, 0.2), true)
+	if zone_right.size != Vector2.ZERO:
+		draw_rect(zone_right, Color(0.3, 0.05, 0.1, 0.2), true)
 
 func _begin_turn() -> void:
 	# Choose next living actor for the current team and highlight them

@@ -84,4 +84,3 @@ func _start_idle():
 func _stop_idle():
 	if _idle_tween and _idle_tween.is_valid():
 		_idle_tween.kill()
-
